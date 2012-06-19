@@ -1,0 +1,6 @@
+Dotfiles
+--------
+
+Shared between computers
+
+vim, awesome
