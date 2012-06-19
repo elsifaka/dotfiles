@@ -4,3 +4,6 @@
 [submodule "vim/bundle/exvim"]
 	path = vim/bundle/exvim
 	url = https://github.com/jwu/exvim.git
+[submodule "vim/bundle/git-vim"]
+	path = vim/bundle/git-vim
+	url = https://github.com/motemen/git-vim.git
