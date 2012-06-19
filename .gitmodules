@@ -25,3 +25,6 @@
 [submodule "vim/bundle/scss-syntax.vim"]
 	path = vim/bundle/scss-syntax.vim
 	url = http://github.com/cakebaker/scss-syntax.vim
+[submodule "vim/bundle/sessionman.vim"]
+	path = vim/bundle/sessionman.vim
+	url = https://github.com/vim-scripts/sessionman.vim.git
