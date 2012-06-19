@@ -73,3 +73,6 @@
 [submodule "awesome/awesome-freedesktop"]
 	path = awesome/awesome-freedesktop
 	url = https://github.com/terceiro/awesome-freedesktop
+[submodule "awesome/shifty"]
+	path = awesome/shifty
+	url = https://github.com/bioe007/awesome-shifty.git
