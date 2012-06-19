@@ -1,0 +1,3 @@
+supertab.vba: call delete('/home/tosoa/.vim/doc/supertab.txt')|call delete('/home/tosoa/.vim/plugin/supertab.vim')
+twitvim-0.5.5.vba: call delete('/home/tosoa/.vim/plugin/twitvim.vim')|call delete('/home/tosoa/.vim/doc/twitvim.txt')
+lorem.vba: call delete('/home/tosoa/.vim/autoload/loremipsum.vim')|call delete('/home/tosoa/.vim/autoload/loremipsum.txt')|call delete('/home/tosoa/.vim/plugin/loremipsum.vim')|call delete('/home/tosoa/.vim/doc/loremipsum.txt')
