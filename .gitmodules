@@ -1,3 +1,6 @@
 [submodule "vim/bundle/css3"]
 	path = vim/bundle/css3
 	url = http://github.com/vim-scripts/css3
+[submodule "vim/bundle/exvim"]
+	path = vim/bundle/exvim
+	url = https://github.com/jwu/exvim.git
