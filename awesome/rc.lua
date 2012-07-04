@@ -100,6 +100,7 @@ shifty.config.tags = {
 		position  = 1,
 		init      = true,
 		slave     = true,
+		persist 	= true,
 	},
 	dev = {
 		layout      = awful.layout.suit.tile.max,
