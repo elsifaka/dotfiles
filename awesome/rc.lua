@@ -99,7 +99,6 @@ shifty.config.tags = {
 		exclusive = false,
 		position  = 1,
 		init      = true,
-		screen    = 1,
 		slave     = true,
 	},
 	dev = {
@@ -249,6 +248,26 @@ shifty.config.apps = {
 			awful.mouse.client.move(c)
 		end),
 		awful.button({modkey}, 3, awful.mouse.client.resize)
+		),
+		keys = awful.util.table.join(
+		awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+		awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+		awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+		awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+		awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
+		awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
+		awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
+		awful.key({ modkey,           }, "n",
+		function (c)
+			-- The client currently has the input focus, so it cannot be
+			-- minimized, since minimized clients can't have the focus.
+			c.minimized = true
+		end),
+		awful.key({ modkey,           }, "m",
+		function (c)
+			c.maximized_horizontal = not c.maximized_horizontal
+			c.maximized_vertical   = not c.maximized_vertical
+		end)
 		)
 	},
 }
@@ -465,26 +484,6 @@ function ()
 end)
 )
 
-clientkeys = awful.util.table.join(
-awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
-awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
-awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
-awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-awful.key({ modkey,           }, "n",
-function (c)
-	-- The client currently has the input focus, so it cannot be
-	-- minimized, since minimized clients can't have the focus.
-	c.minimized = true
-end),
-awful.key({ modkey,           }, "m",
-function (c)
-	c.maximized_horizontal = not c.maximized_horizontal
-	c.maximized_vertical   = not c.maximized_vertical
-end)
-)
 
 -- Compute the maximum number of digit we need, limited to 9
 keynumber = 9
@@ -533,13 +532,15 @@ root.keys(globalkeys)
 
 awful.rules.rules = {
     -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-										 size_hints_honor = false,
-                     focus = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons } },
+		{
+			rule = { },
+			properties = {
+				border_width = beautiful.border_width,
+				border_color = beautiful.border_normal,
+				size_hints_honor = false,
+				focus = true,
+			}
+		},
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
