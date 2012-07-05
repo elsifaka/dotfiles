@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/home/tosoa/.irssi'
-let g:netrw_dirhist_2='/home/tosoa/Documents/workspace/unicefmada/ureport/ureport_project/django_eav/docs'
-let g:netrw_dirhist_3='/root'
-let g:netrw_dirhist_4='/home/tosoa/.config/fuse-google-drive'
-let g:netrw_dirhist_5='/home/tosoa/Documents/workspace/tag-ip'
