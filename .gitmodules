@@ -76,3 +76,6 @@
 [submodule "awesome/shifty"]
 	path = awesome/shifty
 	url = https://github.com/bioe007/awesome-shifty.git
+[submodule "vim-slim"]
+	path = vim-slim
+	url = ./vim/bundle/vim-slim

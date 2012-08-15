@@ -597,3 +597,4 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 run_once("volumeicon")
 run_once("kupfer")
 run_once("nautilus -n")
+run_once("nm-applet")
