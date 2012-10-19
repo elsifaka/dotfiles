@@ -43,14 +43,14 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
--- urxvtc lives in /usr/local/bin/urxvtc
+-- urxvtc lives in /usr/bin/urxvtcd
 browser = "/usr/bin/firefox"
 screenlock = "/usr/bin/gnome-screensaver-command -l"
-terminal = "/usr/local/bin/urxvtc"
-terminal_ = "/usr/local/bin/urxvtc -pe tabbed -n scratchpad"
+terminal = "/usr/bin/urxvtcd"
+terminal_ = "/usr/bin/urxvtcd -pe tabbed -n scratchpad -title scratchpad"
 editor = "gvim" or os.getenv("EDITOR") or "nano"
 editor_cmd = editor
-mail = "/usr/local/bin/urxvtc -e mutt"
+mail = "/usr/bin/urxvtcd -e mutt"
 -- editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -103,43 +103,55 @@ shifty.config.tags = {
 		persist 	= true,
 	},
 	dev = {
-		layout      = awful.layout.suit.tile.max,
+		layout      = awful.layout.suit.max,
 		mwfact      = 0.65,
 		position    = 2,
 		exclusive 	= true,
-		max_clients = 1
+		max_clients = 1,
+		screen = 1,
+	},
+	vt = {
+		position = 2,
+		exclusive = true,
+		screen = 1,
 	},
 	im = {
-		layout      = awful.layout.suit.tile.right,
+		layout      = awful.layout.suit.max,
 		mwfact      = 0.65,
 		position    = 3,
-		spawn 			= "pidgin",
-		exclusive   = true
+		exclusive   = true,
+		screen = 2,
+		init = true,
 	},
 	web = {
-		layout      = awful.layout.suit.tile.bottom,
+		layout      = awful.layout.suit.max,
 		mwfact      = 0.65,
 		exclusive   = true,
 		max_clients = 1,
 		position    = 4,
 		spawn       = browser,
+		screen = 2,
+	},
+	mon = {
+		screen = 2,
+		position = 9,
+	},
+	music = {
+		screen = 2,
 	},
 	mail = {
 		layout    = awful.layout.suit.tile,
 		mwfact    = 0.55,
-		exclusive = false,
+		exclusive = true,
 		position  = 5,
-		spawn     = mail,
-		slave     = true
+		slave     = true,
+		init = true,
+		screen = 2,
 	},
 	media = {
 		layout    = awful.layout.suit.float,
 		exclusive = false,
 		position  = 8,
-	},
-	office = {
-		layout   = awful.layout.suit.tile,
-		position = 9,
 	},
 }
 
@@ -148,11 +160,18 @@ shifty.config.tags = {
 shifty.config.apps = {
 	{
 		match = {
+			"surf",
+		},
+		tag = "mon",
+	},
+	{
+		match = {
 			"Navigator",
 			"Vimperator",
 			"Pentadactyl",
 			"Gran Paradiso",
 			"luakit",
+			"chromium-browser"
 		},
 		tag = "web",
 	},
@@ -182,6 +201,7 @@ shifty.config.apps = {
 	},
 	{
 		match = {
+			"LibreOffice.*",
 			"OpenOffice.*",
 			"Abiword",
 			"Gnumeric",
@@ -211,14 +231,16 @@ shifty.config.apps = {
 	},
 	{
 		match = {
-			terminal,
+			"URxvt",
 		},
-		honorsizehints = false,
+		tag = "vt",
 		slave = true,
 	},
 	{
 		match = {
-			"Pidgin"
+			"Pidgin",
+			"xchat",
+			"skype"
 		},
 		tag = "im"
 	},
@@ -255,7 +277,8 @@ shifty.config.apps = {
 		awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
 		awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
 		awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-		awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
+		awful.key({ modkey,           }, "o",      function() awful.screen.focus_relative(1)     end),
+		awful.key({ modkey, "Control" }, "o",      awful.client.movetoscreen                        ),
 		awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
 		awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
 		awful.key({ modkey,           }, "n",
@@ -397,7 +420,7 @@ for s = 1, screen.count() do
 		},
 		mylayoutbox[s],
 		mytextclock,
-		s == 1 and mysystray or nil,
+		s == 2 and mysystray or nil,
 		mytasklist[s],
 		layout = awful.widget.layout.horizontal.rightleft
 	}
@@ -422,6 +445,15 @@ awful.button({ }, 5, awful.tag.viewprev)
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+awful.key({ "Mod1", }, "Tab",
+        function ()
+            awful.client.focus.history.previous()
+            if client.focus then
+                client.focus:raise()
+            end
+        end),
+awful.key({ modkey, "Shift"   }, "Left",   awful.screen.focus(1)    ),
+awful.key({ modkey, "Shift"   }, "Right",  awful.screen.focus(2)    ),
 awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
 awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
 awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
@@ -456,7 +488,7 @@ end),
 awful.key({ modkey, "Control", "Shift" }, "l", function () awful.util.spawn(screenlock) end),
 awful.key({ modkey,           }, "b", function () awful.util.spawn(browser) end),
 -- awful.key({ modkey, "Shift"   }, "b", function () awful.util.spawn("/usr/bin/showbatt") end),
-awful.key({ modkey, "Shift"   }, "m", function () awful.util.spawn(mail) end),
+-- awful.key({ modkey, "Shift"   }, "m", function () awful.util.spawn(mail) end),
 awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
 awful.key({ modkey, "Shift"   }, "Return", function () scratch.drop(terminal_, "bottom", "center", .60, .30, true) end),
 awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -595,5 +627,9 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 -- run_once("cbatticon")
 run_once("volumeicon")
-run_once("kupfer")
+-- run_once("kupfer")
+run_once("synapse")
+run_once("gnome-keyring-daemon")
 run_once("nautilus -n")
+run_once("nm-applet")
+run_once("surf https://192.168.0.237/nagios/cgi-bin/tac.cgi")

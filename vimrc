@@ -21,6 +21,11 @@ set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set nu
+set smarttab
+set tabstop=2
+set shiftwidth=2
+set autoindent
+set expandtab
 
 " BEGIN Adam Lowe VIM conf
 " http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
@@ -29,11 +34,6 @@ call pathogen#runtime_append_all_bundles()
 
 syntax on
 filetype plugin indent on
-set tabstop=2
-set smarttab
-set shiftwidth=2
-set autoindent
-set expandtab
 " END Adam Lowe VIM conf
 
 runtime! macros/matchit.vim
@@ -110,4 +110,3 @@ set wildmenu
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 colorscheme railscasts
-
