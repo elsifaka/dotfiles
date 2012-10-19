@@ -1,2 +1,4 @@
 vim/session
+vim/sessions
 *.swp
+*.swo
