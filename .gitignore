@@ -2,3 +2,4 @@ vim/session
 vim/sessions
 *.swp
 *.swo
+vim/.netrwhist

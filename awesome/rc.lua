@@ -137,7 +137,8 @@ shifty.config.tags = {
 		position = 9,
 	},
 	music = {
-		screen = 2,
+		screen = 1,
+		position = 8,
 	},
 	mail = {
 		layout    = awful.layout.suit.tile,
@@ -632,4 +633,5 @@ run_once("synapse")
 run_once("gnome-keyring-daemon")
 run_once("nautilus -n")
 run_once("nm-applet")
-run_once("surf https://192.168.0.237/nagios/cgi-bin/tac.cgi")
+-- run_once("surf https://192.168.0.237/nagios/cgi-bin/tac.cgi")
+run_once("surf http://shinken.tag-ip.lan/check_mk/")
