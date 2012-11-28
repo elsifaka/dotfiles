@@ -1,5 +1,5 @@
-vim/session
 vim/sessions
+vim/session
 *.swp
 *.swo
 vim/.netrwhist

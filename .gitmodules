@@ -79,3 +79,6 @@
 [submodule "vim/bundle/vim-coffee-script"]
 	path = vim/bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "vim-slim"]
+	path = vim-slim
+	url = ./vim/bundle/vim-slim

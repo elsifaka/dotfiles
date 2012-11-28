@@ -1,5 +1,5 @@
 if v:progname =~? "evim"
-  finish
+	finish
 endif
 
 set nocompatible
@@ -8,11 +8,11 @@ set backspace=indent,eol,start
 
 " unicode support
 if has("multi_byte")
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  set bomb
+	set encoding=utf-8
+	setglobal fileencoding=utf-8
+	set bomb
 else
-  echoerr "this version of (g)Vim was not compiled with +multi_byte"
+	echoerr "this version of (g)Vim was not compiled with +multi_byte"
 end
 
 set nobackup		" do not keep a backup file, use versions instead
